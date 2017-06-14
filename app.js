@@ -10,6 +10,11 @@ var index = require('./routes/index');
 
 var app = express();
 
+//---- Socket.io ----------------
+app.io = require('socket.io')();
+
+//---- Socket.io ----------------
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -23,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,5 +47,33 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+//-------- Socket io --------------------------------------------
+var utilities = require("./services/utilities.js");
+var moment = require('moment');
+var n = 1000;   // 1000 milisegungos
+
+app.io.on('connection', function(socket){  
+  
+  console.log('a new connection');
+
+  socket.on('disconnect', function(){
+    console.log('new disconnection');
+  });
+
+  socket.on('newSecond', function(msg){
+    
+    setInterval(function(){
+
+      utilities.getBerlinClockRep(moment(),function(err, resp){
+
+        if(err) res.status(500).end();
+        else app.io.emit('newSecond', resp);
+      });
+    }, n);    
+  });
+});
+//-------- Socket io --------------------------------------------
 
 module.exports = app;

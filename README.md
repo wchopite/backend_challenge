@@ -47,3 +47,16 @@ A continuacion la explicacion de los keys:
 - five_min: Indica la cantidad de minutos de la tercera fila en el formato Berlin Clock. Los valores posibles son: 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 y 55.
 
 - one_min: Indica la cantidad de minutos de la cuarta fila en el formato Berlin Clock. Los valores posibles son: 0, 1, 2, 3 y 4.
+
+## Uso de canvas para generar las imagenes
+
+Para este proyecto se utilizo node-canvas.
+
+En caso de utilizar ubuntu se deben instalar las siguientes dependencias:
+
+sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
+
+Para mayor informacion consutar el siguiente enlace:
+
+https://github.com/Automattic/node-canvas
+
