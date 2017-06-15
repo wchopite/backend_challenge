@@ -48,7 +48,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
 //-------- Socket io --------------------------------------------
 var utilities = require("./services/utilities.js");
 var moment = require('moment');
